@@ -7,7 +7,7 @@ import { drawRect } from "./utilities";
 import Button from "./components/Button";
 
 function App() {
-  runCompletion();
+  // runCompletion();
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
   const [classArray, setClassArray] = useState([]);
@@ -41,7 +41,7 @@ function App() {
       const ctx = canvasRef.current.getContext("2d");
       drawRect(obj, ctx);
 
-      setClassArray(obj.map(obj => obj.class));
+      setClassArray([...new Set(obj.map(obj => obj.class))]);
       const classes = obj.map(obj => obj.class)
       console.log(classes)
     }
@@ -52,7 +52,7 @@ function App() {
   return (
     <>
     <div className="App">
-      <ChatGpt cpInput = 'rock'/>
+      {/* <ChatGpt cpInput = 'rock'/> */}
       <header className="App-header">
         <Webcam
           ref={webcamRef}
@@ -89,7 +89,7 @@ function App() {
       </header>
       <div>
         {classArray.map(className => (
-          <Button key={className} className={className}/>
+          <Button onClick={handleClick} key={className} className={className}/>
         ))}
       </div>
     </div>
