@@ -1,4 +1,4 @@
-export const drawRect = (detections, ctx) => {
+export const drawRect = (detections, ctx, description) => {
     detections.forEach(prediction => {
         // get prediction
         const [x,y,width,height] = prediction['bbox']
@@ -13,7 +13,9 @@ export const drawRect = (detections, ctx) => {
         // draw rects and text
         ctx.beginPath()
         ctx.fillText(text, x, y)
+        
         ctx.rect(x, y, width, height)
+        ctx.fillText(description, x, y+100)
         ctx.stroke()
 
     })

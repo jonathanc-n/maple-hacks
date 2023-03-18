@@ -45,7 +45,7 @@ function App() {
       const obj = await net.detect(video);
 
       const ctx = canvasRef.current.getContext("2d");
-      drawRect(obj, ctx);
+      drawRect(obj, ctx, "pppppppppp");
 
       setClassArray([...new Set(obj.map(obj => obj.class))]);
       // const classes = obj.map(obj => obj.class)
