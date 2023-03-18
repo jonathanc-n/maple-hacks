@@ -1,38 +1,108 @@
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@100;300;400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Sora", sans-serif;
+}
+main {
+  position: absolute;
+}
+.title {
+}
 .App {
-  text-align: center;
+}
+.gradient {
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background: linear-gradient(rgba(0, 173, 26, 0.5), rgba(0, 173, 26, 0.5));
+}
+.background {
+  z-index: -2;
+  background: cover;
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  filter: grayscale(30%);
+}
+nav {
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.nav-bar {
+  flex: 1;
+  padding: 1.5% 10vw;
+  text-align: right;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.nav-bar ul li {
+  padding: 1% 1.5%;
+  display: inline-block;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 90vh;
+.nav-bar ul li a {
+  text-decoration: none;
+  font-size: 22px;
+  color: #f2f2f2;
+  font-weight: 400;
+}
+Webcam {
+  margin-top: 500px;
+}
+.header2 {
+  min-height: 100vh;
+  width: 100%;
+  background-color: green;
+}
+.header1 {
+  min-height: 100vh;
+  width: 100%;
+}
+.purpose {
+  min-height: 100vh;
+  width: 100%;
+  background-color: rgb(0, 153, 23);
+}
+.bigTitle {
+  position: absolute;
+  left: 10vw;
+  top: 60vh;
+}
+.title1 {
+  font-size: 82px;
+  color: #f2f2f2;
+  font-weight: 700;
+}
+.toApplication {
+  height: 60px;
+  width: 250px;
+  border-radius: 40px;
+  background-color: #ececec;
+  text-decoration: none;
+  font-size: 1.6rem;
+  color: green;
+  font-weight: 500;
+  margin-left: 1vw;
+  cursor: pointer;
+  border: none;
+  margin-top: 0.5rem;
+}
+.toApplication:hover {
+  background-color: green;
+  color: #f2f2f2;
+}
+.fullCamera {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.titleCamera {
+  font-size: 2rem;
+  margin: 2rem 0;
+  color: #f2f2f2;
+  font-weight: 500;
 }
