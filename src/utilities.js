@@ -15,7 +15,6 @@ export const drawRect = (detections, ctx, description) => {
         ctx.fillText(text, x, y)
         
         ctx.rect(x, y, width, height)
-        ctx.fillText(description, x, y+100)
         ctx.stroke()
 
     })
