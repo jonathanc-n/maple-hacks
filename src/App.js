@@ -11,6 +11,7 @@ function App() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
   const [classArray, setClassArray] = useState([]);
+  const [object, setObject] = useState('')
 
   // Main function
   const runCoco = async () => {
@@ -19,6 +20,11 @@ function App() {
       detect(net);
     }, 10);
   };
+
+  const handleClick = (className) => {
+    setObject(className)
+    console.log(object)
+  }
 
   const detect = async (net) => {
     if (
@@ -42,8 +48,8 @@ function App() {
       drawRect(obj, ctx);
 
       setClassArray([...new Set(obj.map(obj => obj.class))]);
-      const classes = obj.map(obj => obj.class)
-      console.log(classes)
+      // const classes = obj.map(obj => obj.class)
+      // console.log(classes)
     }
   };
 
@@ -89,7 +95,8 @@ function App() {
       </header>
       <div>
         {classArray.map(className => (
-          <Button onClick={handleClick} key={className} className={className}/>
+          // <Button onClick={() => handleClick(className)} key={className} className={className}/>
+          <button onClick={() => handleClick(className)}>{className}</button>
         ))}
       </div>
     </div>
