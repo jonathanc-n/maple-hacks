@@ -1,3 +1,3 @@
 function toAppjs() {
-  window.location.href = "App.js";
+  window.location.href = "appjs.html";
 }

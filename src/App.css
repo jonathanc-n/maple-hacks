@@ -1,6 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@100;300;400;500;600;700&display=swap");
+
 * {
   margin: 0;
   padding: 0;
+  font-family: "Sora", sans-serif;
 }
 main {
   position: absolute;
@@ -14,7 +17,7 @@ main {
   height: 100%;
   width: 100%;
   position: absolute;
-  background: linear-gradient(rgba(0, 173, 26, 0.7), rgba(0, 173, 26, 0.7));
+  background: linear-gradient(rgba(0, 173, 26, 0.5), rgba(0, 173, 26, 0.5));
 }
 .background {
   z-index: -2;
@@ -45,9 +48,10 @@ nav {
   text-decoration: none;
   font-size: 22px;
   color: #f2f2f2;
-  font-weight: bold;
+  font-weight: 400;
 }
 Webcam {
+  margin-top: 500px;
 }
 .header2 {
   min-height: 100vh;
@@ -58,6 +62,11 @@ Webcam {
   min-height: 100vh;
   width: 100%;
 }
+.purpose {
+  min-height: 100vh;
+  width: 100%;
+  background-color: rgba(0, 173, 26);
+}
 .bigTitle {
   position: absolute;
   left: 10rem;
@@ -66,7 +75,7 @@ Webcam {
 .title1 {
   font-size: 82px;
   color: #f2f2f2;
-  font-weight: bold;
+  font-weight: 700;
 }
 .toApplication {
   height: 60px;
@@ -74,9 +83,9 @@ Webcam {
   border-radius: 40px;
   background-color: #ececec;
   text-decoration: none;
-  font-size: 20px;
+  font-size: 1.6rem;
   color: green;
-  font-weight: 400;
+  font-weight: 500;
   margin-left: 1vw;
   cursor: pointer;
   border: none;
@@ -85,4 +94,15 @@ Webcam {
 .toApplication:hover {
   background-color: green;
   color: #f2f2f2;
+}
+.fullCamera {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.titleCamera {
+  font-size: 2rem;
+  margin: 2rem 0;
+  color: #f2f2f2;
+  font-weight: 500;
 }
