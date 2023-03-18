@@ -1,62 +1,48 @@
-// Import dependencies
 import React, { useRef, useState, useEffect } from "react";
 import * as tf from "@tensorflow/tfjs";
-// 1. TODO - Import required model here
-// e.g. import * as tfmodel from "@tensorflow-models/tfmodel";
-import * as cocossd from "@tensorflow-models/coco-ssd"
+import * as cocossd from "@tensorflow-models/coco-ssd";
 import Webcam from "react-webcam";
 import "./App.css";
-// 2. TODO - Import drawing utility here
 import { drawRect } from "./utilities";
-
+import Button from "./components/Button";
 
 function App() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
+  const [classArray, setClassArray] = useState([]);
 
   // Main function
   const runCoco = async () => {
-    // 3. TODO - Load network 
-    // e.g. const net = await cocossd.load();
-    const net = await cocossd.load()
-    
-    //  Loop and detect hands
+    const net = await cocossd.load();
     setInterval(() => {
       detect(net);
     }, 10);
   };
 
   const detect = async (net) => {
-    // Check data is available
     if (
       typeof webcamRef.current !== "undefined" &&
       webcamRef.current !== null &&
       webcamRef.current.video.readyState === 4
     ) {
-      // Get Video Properties
       const video = webcamRef.current.video;
       const videoWidth = webcamRef.current.video.videoWidth;
       const videoHeight = webcamRef.current.video.videoHeight;
 
-      // Set video width
       webcamRef.current.video.width = videoWidth;
       webcamRef.current.video.height = videoHeight;
 
-      // Set canvas height and width
       canvasRef.current.width = videoWidth;
       canvasRef.current.height = videoHeight;
 
-      // 4. TODO - Make Detections
-      // e.g. const obj = await net.detect(video);
-      const obj = await net.detect(video)
-      console.log(obj)
+      const obj = await net.detect(video);
 
-      // Draw mesh
       const ctx = canvasRef.current.getContext("2d");
+      drawRect(obj, ctx);
 
-      // 5. TODO - Update drawing utility
-      drawRect(obj, ctx)  
-
+      setClassArray(obj.map(obj => obj.class));
+      const classes = obj.map(obj => obj.class)
+      console.log(classes)
     }
   };
 
@@ -96,6 +82,11 @@ function App() {
           }}
         />
       </header>
+      <div>
+        {classArray.map(className => (
+          <Button key={className} className={className}/>
+        ))}
+      </div>
     </div>
   );
 }
