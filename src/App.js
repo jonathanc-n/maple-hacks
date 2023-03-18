@@ -1,5 +1,5 @@
 // Import dependencies
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import * as tf from "@tensorflow/tfjs";
 // 1. TODO - Import required model here
 // e.g. import * as tfmodel from "@tensorflow-models/tfmodel";
@@ -8,11 +8,33 @@ import Webcam from "react-webcam";
 import "./App.css";
 // 2. TODO - Import drawing utility here
 import { drawRect } from "./utilities";
+import { useState } from 'react';
+import ChatGpt from "./components/ChatGpt.js";
+
+//OPENAI Stuff
+const { Configuration, OpenAIApi } = require("openai");
+require('dotenv').config()
+
+const configuration = new Configuration({
+  apiKey: "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"
+});
+const openai = new OpenAIApi(configuration);
+
+async function runCompletion(object) {
+    const completion = await openai.createCompletion({
+    model: "text-davinci-003",
+    prompt: "how does a tree relate to climate change",
+    });
+    console.log(completion.data.choices[0].text);
+    return(<h1>{completion.data.choices[0].text}</h1>)
+}
 
 
 function App() {
+  runCompletion();
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
+  const [stuff, changeStuff] = useState(0);
 
   // Main function
   const runCoco = async () => {
@@ -63,7 +85,9 @@ function App() {
   useEffect(()=>{runCoco()},[]);
 
   return (
+    <>
     <div className="App">
+      <ChatGpt cpInput = 'rock'/>
       <header className="App-header">
         <Webcam
           ref={webcamRef}
@@ -95,8 +119,12 @@ function App() {
             height: 480,
           }}
         />
+
+       
       </header>
+      
     </div>
+    </>
   );
 }
 
