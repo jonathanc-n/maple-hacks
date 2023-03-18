@@ -1,38 +1,88 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+main {
+  position: absolute;
+}
+.title {
+}
 .App {
-  text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.gradient {
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background: linear-gradient(rgba(0, 173, 26, 0.7), rgba(0, 173, 26, 0.7));
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.background {
+  z-index: -2;
+  background: cover;
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  filter: grayscale(30%);
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 90vh;
-  display: flex;
-  flex-direction: column;
+nav {
+  width: 100%;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.nav-bar {
+  flex: 1;
+  padding: 1.5% 10rem;
+  text-align: right;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.nav-bar ul li {
+  padding: 1% 1.5%;
+  display: inline-block;
+}
+
+.nav-bar ul li a {
+  text-decoration: none;
+  font-size: 22px;
+  color: #f2f2f2;
+  font-weight: bold;
+}
+Webcam {
+}
+.header2 {
+  min-height: 100vh;
+  width: 100%;
+  background-color: green;
+}
+.header1 {
+  min-height: 100vh;
+  width: 100%;
+}
+.bigTitle {
+  position: absolute;
+  left: 10rem;
+  top: 28rem;
+}
+.title1 {
+  font-size: 82px;
+  color: #f2f2f2;
+  font-weight: bold;
+}
+.toApplication {
+  height: 60px;
+  width: 250px;
+  border-radius: 40px;
+  background-color: #ececec;
+  text-decoration: none;
+  font-size: 20px;
+  color: green;
+  font-weight: 400;
+  margin-left: 1vw;
+  cursor: pointer;
+  border: none;
+  margin-top: 0.5rem;
+}
+.toApplication:hover {
+  background-color: green;
+  color: #f2f2f2;
 }
