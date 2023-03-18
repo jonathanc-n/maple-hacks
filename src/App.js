@@ -21,9 +21,12 @@ function App() {
     }, 10);
   };
 
+  useEffect(() => {
+    console.log(object);
+  }, [object]);
+
   const handleClick = (className) => {
     setObject(className)
-    console.log(object)
   }
 
   const detect = async (net) => {
@@ -45,11 +48,12 @@ function App() {
       const obj = await net.detect(video);
 
       const ctx = canvasRef.current.getContext("2d");
-      drawRect(obj, ctx, "pppppppppp");
+      // Apply horizontal flip to the context
+      ctx.translate(videoWidth, 0);
+      ctx.scale(-1, 1);
+      drawRect(obj, ctx, "", videoWidth);
 
-      setClassArray([...new Set(obj.map(obj => obj.class))]);
-      // const classes = obj.map(obj => obj.class)
-      // console.log(classes)
+      setClassArray([...new Set(obj.map((obj) => obj.class))].sort());
     }
   };
 
@@ -71,8 +75,9 @@ function App() {
             right: 0,
             textAlign: "center",
             zindex: 9,
-            width: 640,
-            height: 480,
+            width: 800,
+            height: 600,
+            transform: "scaleX(-1)",
           }}
         />
 
@@ -86,8 +91,9 @@ function App() {
             right: 0,
             textAlign: "center",
             zindex: 8,
-            width: 640,
-            height: 480,
+            width: 800,
+            height: 600,
+            transform: "scaleX(-1)",
           }}
         />
 
