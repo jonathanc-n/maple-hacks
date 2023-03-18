@@ -7,6 +7,7 @@ import { drawRect } from "./utilities";
 import Button from "./components/Button";
 
 function App() {
+  runCompletion();
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
   const [classArray, setClassArray] = useState([]);
@@ -49,7 +50,9 @@ function App() {
   useEffect(()=>{runCoco()},[]);
 
   return (
+    <>
     <div className="App">
+      <ChatGpt cpInput = 'rock'/>
       <header className="App-header">
         <Webcam
           ref={webcamRef}
@@ -81,6 +84,8 @@ function App() {
             height: 480,
           }}
         />
+
+       
       </header>
       <div>
         {classArray.map(className => (
@@ -88,6 +93,7 @@ function App() {
         ))}
       </div>
     </div>
+    </>
   );
 }
 
