@@ -10,7 +10,7 @@ const port = 3001;
 
 const configuration = new Configuration({
     organization: "org-dCV8SSKqMUHKT533nPn1mM4r",
-    apiKey: "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"
+    apiKey: "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"
 });
 const openai = new OpenAIApi(configuration);
 
