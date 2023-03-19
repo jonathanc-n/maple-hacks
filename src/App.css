@@ -161,13 +161,13 @@ p {
 .recycling {
   position: absolute;
   bottom: 0;
-  height: 400px;
+  height: 450px;
   width: auto;
   left: -5vw;
 }
 .forest {
   align-self: flex-end;
-  height: 400px;
+  height: 450px;
   width: auto;
   position: absolute;
   bottom: 0;
