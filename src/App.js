@@ -6,8 +6,10 @@ import Webcam from "react-webcam";
 import "./App.css";
 import { drawRect } from "./utilities";
 import imagething from "./images/wp10650609.jpg";
-import recycling from "./images/recycling.png";
-import forest from "./images/forest.png";
+import recycling from "./images/recycling.png"
+import forest from "./images/forest.png"
+import globe from "./images/globe.png"
+import logo from "./images/climatesnap.svg"
 
 const { Configuration, OpenAIApi } = require("openai");
 
@@ -110,33 +112,58 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <div className="header1">
-          <div class="gradient"></div>
-          <img src={imagething} alt="" class="background" />
-          <nav>
-            <div class="nav-bar">
-              <ul>
-                <li>
-                  <a href="">About</a>
-                </li>
-                <li>
-                  <a href="">Purpose</a>
-                </li>
-                <li>
-                  <a href="#header2">Our Application</a>
-                </li>
-              </ul>
+          <div class="hero">
+            <nav>
+              <div class="nav-bar">
+                <ul>
+                  <li>
+                    <a href="#">Home</a>
+                  </li>
+                  <li>
+                    <a href="#purpose">Purpose</a>
+                  </li>
+                  <li>
+                    <a href="#process">Process</a>
+                  </li>
+                  <li>
+                    <a href="#header2">Our Application</a>
+                  </li>
+                </ul>
+              </div>
+            </nav>
+
+            <div class="bigTitle">
+              <div>
+                <img src={logo} className='logo' />
+                <p className="hero-text">Get to know the effects of and impacts on climate change of everyday things.</p>
+                <a class="" href="#header2">
+                  <button class="toApplication">TRY IT OUT</button>
+                </a>
+              </div>
+              <div className="globe-box">
+                <img src={globe} />
+              </div>
             </div>
-          </nav>
-          <div class="bigTitle">
-            <div class="title1">ClimateSnap</div>
-            <a class="" href="#header2">
-              <button class="toApplication">Try it Out</button>
-            </a>
           </div>
-        </div>
-        <section className="purpose"></section>
+
+        <section className="purpose" id="purpose">
+          <div>
+            <h3>Purpose</h3>
+            <p className="purpose-text">**PLACEHOLDER** Our charity is dedicated to addressing the pressing issue of climate change. We currently tackle this issue through advocacy to municipal government, youth, and businesses. However, we face the challenge of crafting messaging that motivates action without placing the burden solely on the consumer. Our goal is to strike a balance between creating a sense of urgency and fostering a sense of shared responsibility. Additionally, we need to find effective ways to engage potential donors and increase our organization's capacity to address this issue. In short, we want to figure out how to increase engagement from donors and society, while expanding our capacity to create real-world impact</p>
+          </div>
+          <img src={globe} className='globe'/>
+        </section>
+
+        <section className="process" id="process">
+          <div>
+            <h3>Process</h3>
+            <div>
+              <p className="purpose-text">1. Implemented react-webcam integrated with a tensorflow coco-ssd </p>
+              <p className="purpose-text"></p>
+            </div>
+          </div>
+        </section>
+
         <section className="header2" id="header2">
           <div className="headerPictures">
             <div className=" split">
@@ -194,7 +221,7 @@ function App() {
             </div>
           </div>
         </section>
-      </header>
+      
     </div>
   );
 }

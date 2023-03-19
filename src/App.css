@@ -13,21 +13,22 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Sora", sans-serif;
+  scroll-behavior: smooth;
 }
+
+body {
+  background-color: var(--primary);
+
+}
+
 main {
   position: absolute;
 }
-.title {
-}
-.App {
-}
-.gradient {
-  z-index: -1;
+.hero {
+  background-color: var(--dark);
   height: 100vh;
-  width: 100%;
-  position: absolute;
-  background: linear-gradient(rgba(18, 138, 74, 0.5), rgba(0, 173, 26, 0.5));
 }
+
 .background {
   z-index: -2;
   background: cover;
@@ -40,6 +41,7 @@ nav {
   width: 100%;
   justify-content: space-between;
   align-items: center;
+  background-color: var(--dark);
 }
 
 .nav-bar {
@@ -60,25 +62,37 @@ nav {
   font-weight: 400;
 }
 
+.hero-text {
+  color: white;
+  margin-bottom: 20px;
+  width: 30vw;
+}
+
 .header2 {
   min-height: 100vh;
   width: 100%;
   background-color: var(--primary);
 }
-.header1 {
-  min-height: 100vh;
-  width: 100%;
-}
-.purpose {
-  min-height: 100vh;
-  width: 100%;
-  background-color: var(--primary);
+.logo {
+  width: 500px;
+  margin-bottom: 20px;
 }
 .bigTitle {
-  position: absolute;
-  left: 10vw;
-  top: 62vh;
+  width: 80vw;
+  margin: 10vw auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* text-align: center; */
 }
+
+.globe-box {
+  background-color: #fff;
+  width: 40vw;
+  height: 40vw;
+  align-items: center;
+}
+
 .title1 {
   font-size: 82px;
   color: #f2f2f2;
@@ -87,6 +101,8 @@ nav {
 .toApplication {
   font-size: 24px;
   margin-top: 0.5rem;
+  background-color: var(--primary);
+  color: var(--dark);
 }
 .fullCamera {
   display: flex;
@@ -128,7 +144,9 @@ button:hover {
 .description {
   width: 550px;
   padding: 20px;
-  background: #f2f2f2;
+  background-color: var(--dark);
+  color: var(--dark);
+  background: #fff;
   border-radius: 4px;
   margin-bottom: 12px;
   text-align: center;
@@ -158,4 +176,26 @@ p {
 .split {
   height: 100vh;
   width: 50vw;
+}
+
+.purpose {
+  display: flex;
+  align-items: center;
+  width: 80vw;
+  margin: auto;
+  padding-top: 200px;
+  padding-bottom: 200px;
+}
+
+h3 {
+  font-size: 32px;
+  margin-bottom: 4px;
+}
+
+p {
+  font-size: 20px;
+}
+
+.purpose-text {
+  margin-right: 20px;
 }
