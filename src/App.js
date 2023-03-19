@@ -6,16 +6,17 @@ import Webcam from "react-webcam";
 import "./App.css";
 import { drawRect } from "./utilities";
 import imagething from "./images/wp10650609.jpg";
-import recycling from "./images/recycling.png"
-import forest from "./images/forest.png"
-import globe from "./images/globe.png"
-import logo from "./images/climatesnap.svg"
+import recycling from "./images/recycling.png";
+import forest from "./images/forest.png";
+import globe from "./images/globe.png";
+import logo from "./images/climatesnap.svg";
+import TextToSpeech from "./components/tts";
 
 const { Configuration, OpenAIApi } = require("openai");
-require("dotenv").config()
+require("dotenv").config();
 
 const configuration = new Configuration({
-  apiKey: "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"
+  apiKey: "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",
 });
 const openai = new OpenAIApi(configuration);
 
@@ -36,21 +37,29 @@ function App() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
   const [classArray, setClassArray] = useState([]);
-  const [object, setObject] = useState('');
-  const [response, setResponse] = useState('Point your camera at an object and click the button below to find out more info on how that object is related to climate change!');
+  const [object, setObject] = useState("");
+  const [response, setResponse] = useState(
+    "Point your camera at an object and click the button below to find out more info on how that object is related to climate change!"
+  );
 
   async function runCompletion(object) {
-    setResponse("object = " + object + ". Loading...")
+    setResponse("object = " + object + ". Loading...");
     let promptNum = Math.floor(Math.random() * prompts.length);
-    let string = prompts[promptNum][0] + object + prompts[promptNum][1] + " Limit this response to under 50 words"
+    let string =
+      prompts[promptNum][0] +
+      object +
+      prompts[promptNum][1] +
+      " Limit this response to under 50 words";
     //string = "are you chatGPT?"
     fetch("http://localhost:3001", {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ string })
-    }).then((res) => res.json()).then((data) => setResponse(data.message));
+      body: JSON.stringify({ string }),
+    })
+      .then((res) => res.json())
+      .then((data) => setResponse(data.message));
 
     //setStuff(object + ": " + completion.data.choices[0].text);
   }
@@ -111,116 +120,135 @@ function App() {
 
   return (
     <div className="App">
-          <div class="hero">
-            <nav>
-              <div class="nav-bar">
-                <ul>
-                  <li>
-                    <a href="#">Home</a>
-                  </li>
-                  <li>
-                    <a href="#purpose">Purpose</a>
-                  </li>
-                  <li>
-                    <a href="#process">Process</a>
-                  </li>
-                  <li>
-                    <a href="#header2">Our Application</a>
-                  </li>
-                </ul>
-              </div>
-            </nav>
-
-            <div class="bigTitle">
-              <div>
-                <img src={logo} className='logo' />
-                <p className="hero-text">Get to know the effects of and impacts on climate change of everyday things.</p>
-                <a class="" href="#header2">
-                  <button class="toApplication">TRY IT OUT</button>
-                </a>
-              </div>
-              <div className="globe-box">
-                <img src={globe} />
-              </div>
-            </div>
+      <div class="hero">
+        <nav>
+          <div class="nav-bar">
+            <ul>
+              <li>
+                <a href="#">Home</a>
+              </li>
+              <li>
+                <a href="#purpose">Purpose</a>
+              </li>
+              <li>
+                <a href="#process">Process</a>
+              </li>
+              <li>
+                <a href="#header2">Our Application</a>
+              </li>
+            </ul>
           </div>
+        </nav>
 
-        <section className="purpose" id="purpose">
+        <div class="bigTitle">
           <div>
-            <h3>Purpose</h3>
-            <p className="purpose-text">**PLACEHOLDER** Our charity is dedicated to addressing the pressing issue of climate change. We currently tackle this issue through advocacy to municipal government, youth, and businesses. However, we face the challenge of crafting messaging that motivates action without placing the burden solely on the consumer. Our goal is to strike a balance between creating a sense of urgency and fostering a sense of shared responsibility. Additionally, we need to find effective ways to engage potential donors and increase our organization's capacity to address this issue. In short, we want to figure out how to increase engagement from donors and society, while expanding our capacity to create real-world impact</p>
+            <img src={logo} className="logo" />
+            <p className="hero-text">
+              Get to know the effects of and impacts on climate change of
+              everyday things.
+            </p>
+            <a class="" href="#header2">
+              <button class="toApplication">TRY IT OUT</button>
+            </a>
           </div>
-          <img src={globe} className='globe'/>
-        </section>
+          <div className="globe-box">
+            <img src={globe} />
+          </div>
+        </div>
+      </div>
 
-        <section className="process" id="process">
+      <section className="purpose" id="purpose">
+        <div>
+          <h3>Purpose</h3>
+          <p className="purpose-text">
+            **PLACEHOLDER** Our charity is dedicated to addressing the pressing
+            issue of climate change. We currently tackle this issue through
+            advocacy to municipal government, youth, and businesses. However, we
+            face the challenge of crafting messaging that motivates action
+            without placing the burden solely on the consumer. Our goal is to
+            strike a balance between creating a sense of urgency and fostering a
+            sense of shared responsibility. Additionally, we need to find
+            effective ways to engage potential donors and increase our
+            organization's capacity to address this issue. In short, we want to
+            figure out how to increase engagement from donors and society, while
+            expanding our capacity to create real-world impact
+          </p>
+        </div>
+        <img src={globe} className="globe" />
+      </section>
+
+      <section className="process" id="process">
+        <div>
+          <h3>Process</h3>
           <div>
-            <h3>Process</h3>
-            <div>
-              <p className="purpose-text">1. Implemented react-webcam integrated with a tensorflow coco-ssd </p>
-              <p className="purpose-text"></p>
-            </div>
+            <p className="purpose-text">
+              1. Implemented react-webcam integrated with a tensorflow coco-ssd{" "}
+            </p>
+            <p className="purpose-text"></p>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section className="header2" id="header2">
-          <div className="headerPictures">
-            <div className=" split">
-              <img src={recycling} className="recycling" />
-            </div>
-            <div class="split">
-              <img src={forest} className="forest" />
-            </div>
+      <section className="header2" id="header2">
+        <div className="headerPictures">
+          <div className=" split">
+            <img src={recycling} className="recycling" />
           </div>
-          <div className="fullCamera">
-            <div className="titleCamera">ClimateSnap Camera</div>
-            <div className="description">
-              <p>{response}</p>
-            </div>
-            <div className="webcamCanvas">
-              <Webcam
-                ref={webcamRef}
-                muted={true}
-                style={{
-                  position: "absolute",
-                  marginLeft: "auto",
-                  marginRight: "auto",
-                  left: 0,
-                  right: 0,
-                  textAlign: "center",
-                  zindex: 9,
-                  width: 500,
-                  height: 400,
-                  transform: "scaleX(-1)",
-                }}
-              />
-              <canvas
-                ref={canvasRef}
-                style={{
-                  position: "absolute",
-                  marginLeft: "auto",
-                  marginRight: "auto",
-                  left: 0,
-                  right: 0,
-                  textAlign: "center",
-                  zindex: 7,
-                  width: 500,
-                  height: 400,
-                  transform: "scaleX(-1)",
-                }}
-              />
-            </div>
-            <div className="button-container">
-              {classArray.map((className) => (
-                // <Button onClick={() => handleClick(className)} key={className} className={className}/>
-                <button onClick={() => handleClick(className)}>
-                  {className}
-                </button>
-              ))}
-            </div>
+          <div class="split">
+            <img src={forest} className="forest" />
           </div>
-        </section>
-      
+        </div>
+        <div className="fullCamera">
+          <div className="titleCamera">ClimateSnap Camera</div>
+          <div className="description">
+            <p>{response}</p>
+          </div>
+          <div>
+            <TextToSpeech text={response} />
+          </div>
+          <div className="webcamCanvas">
+            <Webcam
+              ref={webcamRef}
+              muted={true}
+              style={{
+                position: "absolute",
+                marginLeft: "auto",
+                marginRight: "auto",
+                left: 0,
+                right: 0,
+                textAlign: "center",
+                zindex: 9,
+                width: 500,
+                height: 400,
+                transform: "scaleX(-1)",
+              }}
+            />
+            <canvas
+              ref={canvasRef}
+              style={{
+                position: "absolute",
+                marginLeft: "auto",
+                marginRight: "auto",
+                left: 0,
+                right: 0,
+                textAlign: "center",
+                zindex: 7,
+                width: 500,
+                height: 400,
+                transform: "scaleX(-1)",
+              }}
+            />
+          </div>
+          <div className="button-container">
+            {classArray.map((className) => (
+              // <Button onClick={() => handleClick(className)} key={className} className={className}/>
+              <button onClick={() => handleClick(className)}>
+                {className}
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

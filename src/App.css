@@ -24,7 +24,7 @@ main {
   position: absolute;
 }
 .hero {
-  background-color: var(--dark);
+  background-color:  #1f4530;
   height: 100vh;
 }
 
@@ -78,7 +78,7 @@ nav {
 }
 .bigTitle {
   width: 80vw;
-  margin: 10vw auto;
+  margin: 3vw auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -86,10 +86,9 @@ nav {
 }
 
 .globe-box {
-  background-color: #fff;
-  width: 40vw;
-  height: 40vw;
-  align-items: center;
+  /* background-color: #dcffea; */
+  padding: 90px 0px 90px 15px;
+  border-radius: 50%;
 }
 
 .title1 {
