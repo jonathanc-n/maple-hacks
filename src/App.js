@@ -10,28 +10,40 @@ import imagething from "./images/wp10650609.jpg";
 const { Configuration, OpenAIApi } = require("openai");
 
 const configuration = new Configuration({
-  apiKey: "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"
+  apiKey: "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",
 });
 const openai = new OpenAIApi(configuration);
 
 const prompts = [
   ["how does this ", " impact climate change?"],
-  ["give me an interesting fact about a ", " that relates to climate change. Start the response by saying An interesting fact about"],
-  ["how can I help climate change using a", "? Start the response by saying You can help climate change using a"],
-  ["how can a", " be sustainable? Start the response by saying A..."]
-]
+  [
+    "give me an interesting fact about a ",
+    " that relates to climate change. Start the response by saying An interesting fact about",
+  ],
+  [
+    "how can I help climate change using a",
+    "? Start the response by saying You can help climate change using a",
+  ],
+  ["how can a", " be sustainable? Start the response by saying A..."],
+];
 
 function App() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
   const [classArray, setClassArray] = useState([]);
-  const [object, setObject] = useState('');
-  const [stuff, setStuff] = useState('I am the description box! Point your camera at an object and click the button below to find out more info on how that object is related to climate change!');
+  const [object, setObject] = useState("");
+  const [stuff, setStuff] = useState(
+    "I am the description box! Point your camera at an object and click the button below to find out more info on how that object is related to climate change!"
+  );
 
   async function runCompletion(object) {
-    setStuff("object = " + object + ". Loading...")
+    setStuff("object = " + object + ". Loading...");
     let promptNum = Math.floor(Math.random() * prompts.length);
-    let string = prompts[promptNum][0] + object + prompts[promptNum][1] + " Limit this response to under 50 words"
+    let string =
+      prompts[promptNum][0] +
+      object +
+      prompts[promptNum][1] +
+      " Limit this response to under 50 words";
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
       prompt: string,
@@ -50,11 +62,10 @@ function App() {
     }, 10);
   };
 
-
   const handleClick = (className) => {
     // setObject(className)
     runCompletion(className);
-  }
+  };
 
   const detect = async (net) => {
     // Check data is available
@@ -142,12 +153,11 @@ function App() {
                   right: 0,
                   textAlign: "center",
                   zindex: 9,
-                  width: 800,
-                  height: 600,
-                  transform: "scaleX(-1)"
+                  width: 500,
+                  height: 400,
+                  transform: "scaleX(-1)",
                 }}
               />
-
               <canvas
                 ref={canvasRef}
                 style={{
@@ -157,23 +167,24 @@ function App() {
                   left: 0,
                   right: 0,
                   textAlign: "center",
-                  zindex: 8,
-                  width: 800,
-                  height: 600,
-                  transform: "scaleX(-1)"
+                  zindex: 7,
+                  width: 500,
+                  height: 400,
+                  transform: "scaleX(-1)",
                 }}
               />
             </div>
             <div className="button-container">
-              {classArray.map(className => (
+              {classArray.map((className) => (
                 // <Button onClick={() => handleClick(className)} key={className} className={className}/>
-                <button onClick={() => handleClick(className)}>{className}</button>
+                <button onClick={() => handleClick(className)}>
+                  {className}
+                </button>
               ))}
             </div>
           </div>
         </section>
       </header>
-      
     </div>
   );
 }
