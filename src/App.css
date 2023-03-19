@@ -2,6 +2,7 @@
 :root {
   --primary: #94E7BA;
   --dark: #318155;
+  --med: #7BCCA1;
 }
 * {
   margin: 0;
@@ -118,14 +119,20 @@ button:hover {
   width: 760px;
   padding: 20px;
   display: flex;
-  padding: 24px 48px;
-  margin-top: 600px;
+  margin-top: 624px;
+  background-color: var(--med);
+  border-radius: 4px;
 }
 
 .description {
   width: 760px;
   padding: 20px;
+  background-color: var(--dark);
   background: #fff;
   border-radius: 4px;
   margin-bottom: 24px;
+}
+
+.recycling {
+  float: left;
 }

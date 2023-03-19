@@ -6,6 +6,8 @@ import Webcam from "react-webcam";
 import "./App.css";
 import { drawRect } from "./utilities";
 import imagething from "./images/wp10650609.jpg";
+import recycling from "./images/recycling.png"
+import forest from "./images/forest.png"
 
 const { Configuration, OpenAIApi } = require("openai");
 
@@ -170,6 +172,8 @@ function App() {
                 <button onClick={() => handleClick(className)}>{className}</button>
               ))}
             </div>
+            <img src={forest} className="forest"/>
+            <img src={recycling} className="recycling"/>
           </div>
         </section>
       </header>
