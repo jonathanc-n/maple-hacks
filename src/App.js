@@ -13,7 +13,7 @@ import imagething from "./images/wp10650609.jpg";
 const { Configuration, OpenAIApi } = require("openai");
 
 const configuration = new Configuration({
-  apiKey: "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"
+  apiKey: "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"
 });
 const openai = new OpenAIApi(configuration);
 
