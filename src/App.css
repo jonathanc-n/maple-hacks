@@ -123,6 +123,7 @@ button:hover {
   display: flex;
   padding: 24px 48px;
   margin-top: 400px;
+  justify-content: center;
 }
 .description {
   width: 550px;
