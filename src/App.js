@@ -6,6 +6,10 @@ import Webcam from "react-webcam";
 import "./App.css";
 import { drawRect } from "./utilities";
 import imagething from "./images/wp10650609.jpg";
+import recycling from "./images/recycling.png"
+import forest from "./images/forest.png"
+import globe from "./images/globe.png"
+import logo from "./images/climatesnap.svg"
 
 const { Configuration, OpenAIApi } = require("openai");
 require("dotenv").config()
@@ -17,10 +21,16 @@ const openai = new OpenAIApi(configuration);
 
 const prompts = [
   ["how does this ", " impact climate change?"],
-  ["give me an interesting fact about a ", " that relates to climate change. Start the response by saying An interesting fact about"],
-  ["how can I help climate change using a", "? Start the response by saying You can help climate change using a"],
-  ["how can a", " be sustainable? Start the response by saying A..."]
-]
+  [
+    "give me an interesting fact about a ",
+    " that relates to climate change. Start the response by saying An interesting fact about",
+  ],
+  [
+    "how can I help climate change using a",
+    "? Start the response by saying You can help climate change using a",
+  ],
+  ["how can a", " be sustainable? Start the response by saying A..."],
+];
 
 function App() {
   const webcamRef = useRef(null);
@@ -55,11 +65,10 @@ function App() {
     }, 10);
   };
 
-
   const handleClick = (className) => {
     // setObject(className)
     runCompletion(className);
-  }
+  };
 
   const detect = async (net) => {
     // Check data is available
@@ -102,34 +111,67 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <div className="header1">
-          <div class="gradient"></div>
-          <img src={imagething} alt="" class="background" />
-          <nav>
-            <div class="nav-bar">
-              <ul>
-                <li>
-                  <a href="">About</a>
-                </li>
-                <li>
-                  <a href="">Purpose</a>
-                </li>
-                <li>
-                  <a href="#header2">Our Application</a>
-                </li>
-              </ul>
+          <div class="hero">
+            <nav>
+              <div class="nav-bar">
+                <ul>
+                  <li>
+                    <a href="#">Home</a>
+                  </li>
+                  <li>
+                    <a href="#purpose">Purpose</a>
+                  </li>
+                  <li>
+                    <a href="#process">Process</a>
+                  </li>
+                  <li>
+                    <a href="#header2">Our Application</a>
+                  </li>
+                </ul>
+              </div>
+            </nav>
+
+            <div class="bigTitle">
+              <div>
+                <img src={logo} className='logo' />
+                <p className="hero-text">Get to know the effects of and impacts on climate change of everyday things.</p>
+                <a class="" href="#header2">
+                  <button class="toApplication">TRY IT OUT</button>
+                </a>
+              </div>
+              <div className="globe-box">
+                <img src={globe} />
+              </div>
             </div>
-          </nav>
-          <div class="bigTitle">
-            <div class="title1">ClimateSnap</div>
-            <a class="" href="#header2">
-              <button class="toApplication">Try it Out</button>
-            </a>
           </div>
-        </div>
-        <section className="purpose"></section>
+
+        <section className="purpose" id="purpose">
+          <div>
+            <h3>Purpose</h3>
+            <p className="purpose-text">**PLACEHOLDER** Our charity is dedicated to addressing the pressing issue of climate change. We currently tackle this issue through advocacy to municipal government, youth, and businesses. However, we face the challenge of crafting messaging that motivates action without placing the burden solely on the consumer. Our goal is to strike a balance between creating a sense of urgency and fostering a sense of shared responsibility. Additionally, we need to find effective ways to engage potential donors and increase our organization's capacity to address this issue. In short, we want to figure out how to increase engagement from donors and society, while expanding our capacity to create real-world impact</p>
+          </div>
+          <img src={globe} className='globe'/>
+        </section>
+
+        <section className="process" id="process">
+          <div>
+            <h3>Process</h3>
+            <div>
+              <p className="purpose-text">1. Implemented react-webcam integrated with a tensorflow coco-ssd </p>
+              <p className="purpose-text"></p>
+            </div>
+          </div>
+        </section>
+
         <section className="header2" id="header2">
+          <div className="headerPictures">
+            <div className=" split">
+              <img src={recycling} className="recycling" />
+            </div>
+            <div class="split">
+              <img src={forest} className="forest" />
+            </div>
+          </div>
           <div className="fullCamera">
             <div className="titleCamera">ClimateSnap Camera</div>
             <div className="description">
@@ -147,12 +189,11 @@ function App() {
                   right: 0,
                   textAlign: "center",
                   zindex: 9,
-                  width: 800,
-                  height: 600,
-                  transform: "scaleX(-1)"
+                  width: 500,
+                  height: 400,
+                  transform: "scaleX(-1)",
                 }}
               />
-
               <canvas
                 ref={canvasRef}
                 style={{
@@ -162,22 +203,23 @@ function App() {
                   left: 0,
                   right: 0,
                   textAlign: "center",
-                  zindex: 8,
-                  width: 800,
-                  height: 600,
-                  transform: "scaleX(-1)"
+                  zindex: 7,
+                  width: 500,
+                  height: 400,
+                  transform: "scaleX(-1)",
                 }}
               />
             </div>
             <div className="button-container">
-              {classArray.map(className => (
+              {classArray.map((className) => (
                 // <Button onClick={() => handleClick(className)} key={className} className={className}/>
-                <button onClick={() => handleClick(className)}>{className}</button>
+                <button onClick={() => handleClick(className)}>
+                  {className}
+                </button>
               ))}
             </div>
           </div>
         </section>
-      </header>
       
     </div>
   );
