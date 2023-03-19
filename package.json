@@ -18,14 +18,10 @@
     "react-webcam": "^5.2.0"
   },
   "scripts": {
-    "start": "export SET NODE_OPTIONS=--openssl-legacy-provider && react-scripts start",
-    "build": "export SET NODE_OPTIONS=--openssl-legacy-provider && react-scripts build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts --openssl-legacy-provider build"
   },
   "eslintConfig": {
     "extends": "react-app"
