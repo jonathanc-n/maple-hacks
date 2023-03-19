@@ -1,12 +1,9 @@
 // Import dependencies
 import React, { useRef, useState, useEffect } from "react";
 import * as tf from "@tensorflow/tfjs";
-// 1. TODO - Import required model here
-// e.g. import * as tfmodel from "@tensorflow-models/tfmodel";
 import * as cocossd from "@tensorflow-models/coco-ssd";
 import Webcam from "react-webcam";
 import "./App.css";
-// 2. TODO - Import drawing utility here
 import { drawRect } from "./utilities";
 import imagething from "./images/wp10650609.jpg";
 
@@ -34,26 +31,17 @@ function App() {
   async function runCompletion(object) {
     setStuff("object = " + object + ". Loading...")
     let promptNum = Math.floor(Math.random() * prompts.length);
-    //promptNum = 3;
     let string = prompts[promptNum][0] + object + prompts[promptNum][1] + " Limit this response to under 50 words"
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
       prompt: string,
       max_tokens: 100,
     });
-    //console.log(completion.data.choices);
     setStuff(object + ": " + completion.data.choices[0].text);
-    //desc = completion.data.choices[0].text;
-    //return(completion.data.choices[0].text);
   }
-  //runCompletion("person")
-
-  //setStuff(runCompletion("tree"));
 
   // Main function
   const runCoco = async () => {
-    // 3. TODO - Load network
-    // e.g. const net = await cocossd.load();
     const net = await cocossd.load();
 
     //  Loop and detect hands
@@ -62,14 +50,10 @@ function App() {
     }, 10);
   };
 
-  useEffect(() => {
-    //console.log(object);
-  }, [object]);
 
   const handleClick = (className) => {
-    setObject(className)
+    // setObject(className)
     runCompletion(className);
-    //console.log(object)
   }
 
   const detect = async (net) => {
@@ -92,8 +76,7 @@ function App() {
       canvasRef.current.width = videoWidth;
       canvasRef.current.height = videoHeight;
 
-      // 4. TODO - Make Detections
-      // e.g. const obj = await net.detect(video);
+      // Make Detections
       const obj = await net.detect(video);
       console.log(obj);
 
@@ -114,7 +97,6 @@ function App() {
 
   return (
     <div className="App">
-      <p>{stuff}</p>
       <header className="App-header">
         <div className="header1">
           <div class="gradient"></div>
@@ -145,6 +127,9 @@ function App() {
         <section className="header2" id="header2">
           <div className="fullCamera">
             <div className="titleCamera">ClimateSnap Camera</div>
+            <div className="description">
+              <p>{stuff}</p>
+            </div>
             <div className="webcamCanvas">
               <Webcam
                 ref={webcamRef}
@@ -158,7 +143,8 @@ function App() {
                   textAlign: "center",
                   zindex: 9,
                   width: 800,
-                  height: 480,
+                  height: 600,
+                  transform: "scaleX(-1)"
                 }}
               />
 
@@ -173,19 +159,21 @@ function App() {
                   textAlign: "center",
                   zindex: 8,
                   width: 800,
-                  height: 480,
+                  height: 600,
+                  transform: "scaleX(-1)"
                 }}
               />
+            </div>
+            <div className="button-container">
+              {classArray.map(className => (
+                // <Button onClick={() => handleClick(className)} key={className} className={className}/>
+                <button onClick={() => handleClick(className)}>{className}</button>
+              ))}
             </div>
           </div>
         </section>
       </header>
-      <div>
-        {classArray.map((className) => (
-          // <Button onClick={() => handleClick(className)} key={className} className={className}/>
-          <button onClick={() => handleClick(className)}>{className}</button>
-        ))}
-      </div>
+      
     </div>
   );
 }
