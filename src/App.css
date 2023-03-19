@@ -6,7 +6,7 @@ body {
 }
 :root {
   --primary: #94e7ba;
-  --dark: #318155;
+  --dark: #2a4d3a;
   --med: #7bcca1;
 }
 * {
@@ -18,13 +18,14 @@ body {
 
 body {
   background-color: var(--primary);
+  color: var(--dark);
 }
 
 main {
   position: absolute;
 }
 .hero {
-  background-color:  #1f4530;
+  background-color:  var(--dark);
   height: 100vh;
 }
 
@@ -106,8 +107,8 @@ nav {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 10px;
-  padding-bottom: 30px;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 .titleCamera {
   font-size: 2rem;
@@ -139,9 +140,10 @@ button:hover {
   margin-top: 400px;
   justify-content: center;
 }
+
 .description {
   width: 550px;
-  padding: 20px;
+  padding: 20px 20px 25px 20px;
   background-color: var(--dark);
   color: var(--dark);
   background: #fff;
@@ -182,13 +184,26 @@ p {
   align-items: center;
   width: 80vw;
   margin: auto;
-  padding-top: 200px;
-  padding-bottom: 200px;
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.process {
+  width: 70vw;
+  margin: 50px auto;
+  padding: 5vw;
+  background-color: var(--dark);
+  border-radius: 4px;
+  color: white !important;
 }
 
 h3 {
   font-size: 32px;
-  margin-bottom: 4px;
+  margin-bottom: 12px;
+}
+
+h4 {
+  margin-bottom: 12px;
 }
 
 p {

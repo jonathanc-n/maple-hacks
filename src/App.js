@@ -10,27 +10,12 @@ import recycling from "./images/recycling.png";
 import forest from "./images/forest.png";
 import globe from "./images/globe.png";
 import logo from "./images/climatesnap.svg";
+import runner from "./images/runner.png"
 import TextToSpeech from "./components/tts";
 
-const { Configuration, OpenAIApi } = require("openai");
-require("dotenv").config();
-
-const configuration = new Configuration({
-  apiKey: "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",
-});
-const openai = new OpenAIApi(configuration);
-
 const prompts = [
-  ["how does this ", " impact climate change?"],
-  [
-    "give me an interesting fact about a ",
-    " that relates to climate change. Start the response by saying An interesting fact about",
-  ],
-  [
-    "how can I help climate change using a",
-    "? Start the response by saying You can help climate change using a",
-  ],
-  ["how can a", " be sustainable? Start the response by saying A..."],
+  ["how much carbon dioxide does a ", " or the production of it emit?"],
+  ["how will a ", "be affected by climate change in the future?"],
 ];
 
 function App() {
@@ -75,7 +60,7 @@ function App() {
   };
 
   const handleClick = (className) => {
-    // setObject(className)
+    setObject(className)
     runCompletion(className);
   };
 
@@ -144,8 +129,7 @@ function App() {
           <div>
             <img src={logo} className="logo" />
             <p className="hero-text">
-              Get to know the effects of and impacts on climate change of
-              everyday things.
+              We all know that the climate is changing, but we don’t realize how it relates to everyday items. That’s why we made ClimateSnap: bringing you the stats in a snap!
             </p>
             <a class="" href="#header2">
               <button class="toApplication">TRY IT OUT</button>
@@ -161,31 +145,24 @@ function App() {
         <div>
           <h3>Purpose</h3>
           <p className="purpose-text">
-            **PLACEHOLDER** Our charity is dedicated to addressing the pressing
-            issue of climate change. We currently tackle this issue through
-            advocacy to municipal government, youth, and businesses. However, we
-            face the challenge of crafting messaging that motivates action
-            without placing the burden solely on the consumer. Our goal is to
-            strike a balance between creating a sense of urgency and fostering a
-            sense of shared responsibility. Additionally, we need to find
-            effective ways to engage potential donors and increase our
-            organization's capacity to address this issue. In short, we want to
-            figure out how to increase engagement from donors and society, while
-            expanding our capacity to create real-world impact
+          If we’re being honest, we really don’t know the climate impacts the objects we see daily cause. For example, what do we know about the CO2 footprint of bottled water? Well… based on the most cited research it's about 0.5 lbs (200 g) per 50 ounces (1.5 liters) bottle which means that 800 bottles per year consumed by the average bottle-drinking household is equal to 350 lbs (160 kg) CO2 or the equivalent of driving 368 miles (592 km) with a car.
+          </p>
+          <p> </p>
+          <p>
+          Who would’ve thought something so minor and insignificant in our lives could create such a significant impact on climate change? Thus, we created ClimateSnap to bring you these stats with just one click!
           </p>
         </div>
-        <img src={globe} className="globe" />
+        <img src={runner} className="globe" />
       </section>
 
-      <section className="process" id="process">
-        <div>
-          <h3>Process</h3>
-          <div>
-            <p className="purpose-text">
-              1. Implemented react-webcam integrated with a tensorflow coco-ssd{" "}
-            </p>
-            <p className="purpose-text"></p>
-          </div>
+      <section id="process">
+          <div className="process">
+            <h3>Process</h3>
+            <div>
+              <p className="purpose-text">1. Implemented react-webcam integrated with a tensorflow coco-ssd object-detection model</p>
+              <p className="purpose-text">2. Integrated Chat GPT's API to generate prompts based on the object selected</p>
+              <p className="purpose-text">3. Styled the app and website for the best user experience</p>
+            </div>
         </div>
       </section>
 
@@ -201,6 +178,7 @@ function App() {
         <div className="fullCamera">
           <div className="titleCamera">ClimateSnap Camera</div>
           <div className="description">
+            <h4>{object.toUpperCase()}</h4>
             <p>{response}</p>
           </div>
           <div>

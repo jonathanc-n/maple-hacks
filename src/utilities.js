@@ -5,7 +5,7 @@ export const drawRect = (detections, ctx, description, videoWidth) => {
       const text = prediction['class'];
   
       // set styling
-      const color = '#318155';
+      const color = '#234e36';
       ctx.strokeStyle = color;
       ctx.font = '24px Poppins';
       ctx.fillStyle = color;
