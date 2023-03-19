@@ -1,26 +1,47 @@
 // Import dependencies
 import React, { useRef, useState, useEffect } from "react";
 import * as tf from "@tensorflow/tfjs";
-// 1. TODO - Import required model here
-// e.g. import * as tfmodel from "@tensorflow-models/tfmodel";
 import * as cocossd from "@tensorflow-models/coco-ssd";
 import Webcam from "react-webcam";
 import "./App.css";
-// 2. TODO - Import drawing utility here
 import { drawRect } from "./utilities";
 import imagething from "./images/wp10650609.jpg";
 
+const { Configuration, OpenAIApi } = require("openai");
+
+const configuration = new Configuration({
+  apiKey: "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"
+});
+const openai = new OpenAIApi(configuration);
+
+const prompts = [
+  ["how does this ", " impact climate change?"],
+  ["give me an interesting fact about a ", " that relates to climate change. Start the response by saying An interesting fact about"],
+  ["how can I help climate change using a", "? Start the response by saying You can help climate change using a"],
+  ["how can a", " be sustainable? Start the response by saying A..."]
+]
+
 function App() {
-  // runCompletion();z
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
   const [classArray, setClassArray] = useState([]);
-  const [object, setObject] = useState("");
+  const [object, setObject] = useState('');
+  const [stuff, setStuff] = useState('I am the description box! Point your camera at an object and click the button below to find out more info on how that object is related to climate change!');
+
+  async function runCompletion(object) {
+    setStuff("object = " + object + ". Loading...")
+    let promptNum = Math.floor(Math.random() * prompts.length);
+    let string = prompts[promptNum][0] + object + prompts[promptNum][1] + " Limit this response to under 50 words"
+    const completion = await openai.createCompletion({
+      model: "text-davinci-003",
+      prompt: string,
+      max_tokens: 100,
+    });
+    setStuff(object + ": " + completion.data.choices[0].text);
+  }
 
   // Main function
   const runCoco = async () => {
-    // 3. TODO - Load network
-    // e.g. const net = await cocossd.load();
     const net = await cocossd.load();
 
     //  Loop and detect hands
@@ -29,13 +50,11 @@ function App() {
     }, 10);
   };
 
-  useEffect(() => {
-    console.log(object);
-  }, [object]);
 
   const handleClick = (className) => {
-    setObject(className);
-  };
+    // setObject(className)
+    runCompletion(className);
+  }
 
   const detect = async (net) => {
     // Check data is available
@@ -57,8 +76,7 @@ function App() {
       canvasRef.current.width = videoWidth;
       canvasRef.current.height = videoHeight;
 
-      // 4. TODO - Make Detections
-      // e.g. const obj = await net.detect(video);
+      // Make Detections
       const obj = await net.detect(video);
       console.log(obj);
 
@@ -79,7 +97,6 @@ function App() {
 
   return (
     <div className="App">
-      {/* <ChatGpt cpInput = 'rock'/> */}
       <header className="App-header">
         <div className="header1">
           <div class="gradient"></div>
@@ -110,6 +127,9 @@ function App() {
         <section className="header2" id="header2">
           <div className="fullCamera">
             <div className="titleCamera">ClimateSnap Camera</div>
+            <div className="description">
+              <p>{stuff}</p>
+            </div>
             <div className="webcamCanvas">
               <Webcam
                 ref={webcamRef}
@@ -123,7 +143,8 @@ function App() {
                   textAlign: "center",
                   zindex: 9,
                   width: 800,
-                  height: 480,
+                  height: 600,
+                  transform: "scaleX(-1)"
                 }}
               />
 
@@ -138,19 +159,21 @@ function App() {
                   textAlign: "center",
                   zindex: 8,
                   width: 800,
-                  height: 480,
+                  height: 600,
+                  transform: "scaleX(-1)"
                 }}
               />
+            </div>
+            <div className="button-container">
+              {classArray.map(className => (
+                // <Button onClick={() => handleClick(className)} key={className} className={className}/>
+                <button onClick={() => handleClick(className)}>{className}</button>
+              ))}
             </div>
           </div>
         </section>
       </header>
-      <div>
-        {classArray.map((className) => (
-          // <Button onClick={() => handleClick(className)} key={className} className={className}/>
-          <button onClick={() => handleClick(className)}>{className}</button>
-        ))}
-      </div>
+      
     </div>
   );
 }
