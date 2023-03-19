@@ -1,7 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Sora:wght@100;300;400;500;600;700&display=swap");
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
 :root {
   --primary: #94e7ba;
   --dark: #318155;
+  --med: #7bcca1;
 }
 * {
   margin: 0;
@@ -128,4 +134,27 @@ button:hover {
 }
 p {
   font-size: 14px;
+}
+.headerPictures {
+  position: absolute;
+  display: flex;
+}
+.recycling {
+  position: absolute;
+  bottom: 0;
+  height: 400px;
+  width: auto;
+  left: -5vw;
+}
+.forest {
+  align-self: flex-end;
+  height: 400px;
+  width: auto;
+  position: absolute;
+  bottom: 0;
+  right: 1vw;
+}
+.split {
+  height: 100vh;
+  width: 50vw;
 }
