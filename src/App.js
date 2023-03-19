@@ -14,7 +14,7 @@ import logo from "./images/climatesnap.svg"
 const { Configuration, OpenAIApi } = require("openai");
 
 const configuration = new Configuration({
-  apiKey: "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",
+  apiKey: "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",
 });
 const openai = new OpenAIApi(configuration);
 
