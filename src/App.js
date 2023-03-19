@@ -12,6 +12,7 @@ import globe from "./images/globe.png"
 import logo from "./images/climatesnap.svg"
 
 const { Configuration, OpenAIApi } = require("openai");
+require("dotenv").config()
 
 const configuration = new Configuration({
   apiKey: "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",
@@ -35,25 +36,23 @@ function App() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
   const [classArray, setClassArray] = useState([]);
-  const [object, setObject] = useState("");
-  const [stuff, setStuff] = useState(
-    "I am the description box! Point your camera at an object and click the button below to find out more info on how that object is related to climate change!"
-  );
+  const [object, setObject] = useState('');
+  const [response, setResponse] = useState('Point your camera at an object and click the button below to find out more info on how that object is related to climate change!');
 
   async function runCompletion(object) {
-    setStuff("object = " + object + ". Loading...");
+    setResponse("object = " + object + ". Loading...")
     let promptNum = Math.floor(Math.random() * prompts.length);
-    let string =
-      prompts[promptNum][0] +
-      object +
-      prompts[promptNum][1] +
-      " Limit this response to under 50 words";
-    const completion = await openai.createCompletion({
-      model: "text-davinci-003",
-      prompt: string,
-      max_tokens: 100,
-    });
-    setStuff(object + ": " + completion.data.choices[0].text);
+    let string = prompts[promptNum][0] + object + prompts[promptNum][1] + " Limit this response to under 50 words"
+    //string = "are you chatGPT?"
+    fetch("http://localhost:3001", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ string })
+    }).then((res) => res.json()).then((data) => setResponse(data.message));
+
+    //setStuff(object + ": " + completion.data.choices[0].text);
   }
 
   // Main function
@@ -93,7 +92,7 @@ function App() {
 
       // Make Detections
       const obj = await net.detect(video);
-      console.log(obj);
+      //console.log(obj);
 
       // Draw mesh
       const ctx = canvasRef.current.getContext("2d");
@@ -176,7 +175,7 @@ function App() {
           <div className="fullCamera">
             <div className="titleCamera">ClimateSnap Camera</div>
             <div className="description">
-              <p>{stuff}</p>
+              <p>{response}</p>
             </div>
             <div className="webcamCanvas">
               <Webcam
